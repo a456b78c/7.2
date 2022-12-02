@@ -1,0 +1,88 @@
+#include <iostream>
+#include <iomanip>
+#include <time.h>
+
+using namespace std;
+
+void Create(int** a, const int n, const int z, const int Low, const int High);
+void Print(int** a, const int n, const int z);
+bool SearchMinEven(int** a, const int n, const int z, int& minEven);
+//void SumEL(int** a, const int n, int& minEven);
+
+int main()
+{
+	srand((unsigned)time(NULL));
+	int Low = -42;
+	int High = 51;
+	int n;
+	int z;
+	cout << "n = "; cin >> n;
+	cout << "z = "; cin >> z;
+		int** a = new int* [n];
+
+	for (int i = 0; i < n; i++)
+		a[i] = new int[n];
+	for (int j = 0; j < n; j++)
+		a[j] = new int[z];
+	
+	Create(a, n, z, Low, High);
+	Print(a, n, z);
+	
+	int minEven;
+	
+	//SumEL(a, n, minEven);
+	if (SearchMinEven(a, n, z, minEven))
+		cout << " " << minEven  << endl;
+	    //cout << " s = " << S;
+	
+	else
+		cout << "there are no even elements" << endl;
+	for (int i = 0; i < n; i++)
+		delete[] a[i];
+	delete[] a;
+	return 0;
+}
+void Create(int** a, const int n, const int z, const int Low, const int High)
+{
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < z; j++)
+			a[i][j] = Low + rand() % (High - Low + 1);
+}
+void Print(int** a, const int n, const int z)
+{
+	cout << endl;
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < z; j++)
+			cout << setw(4) << a[i][j];
+		cout << endl;
+	}
+	cout << endl;
+}
+bool SearchMinEven(int** a, const int n, const int z, int& minEven)
+{
+	
+	
+	int S = 0;
+	for (int j = 0; j < n; j++) {
+		
+		cout << minEven; 
+		cout << endl;
+		minEven = a[j][0];
+		for (int i = 0; i < z; i++)
+		{
+			if (minEven > a[j][i])
+			{
+				minEven = a[j][i];
+			}
+		}
+		
+		S = (S + minEven);
+		
+		
+		
+	}
+	cout << "s = " << S; cout << endl;
+	
+	return true;
+}
